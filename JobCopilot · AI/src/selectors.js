@@ -1,12 +1,12 @@
 // BOSS 直聘选择器（借鉴即投实测验证版）
-const SELECTORS = {
+var SELECTORS = {
   jobs: {
-    jobCard: 'li.job-card-box',
+    jobCard: '.job-card-box, .job-card-wrapper',
     jobName: '.job-name',
     jobSalary: '.job-salary',
     tagList: '.tag-list li',
-    company: '.company-name, .boss-info .company-name, [class*="company-name"]',
-    immediateChatBtn: 'a.op-btn-chat'
+    company: '.company-name, .company-logo, .boss-info .company-name, [class*="company-name"]',
+    immediateChatBtn: 'a.op-btn-chat, .job-banner .btn-startchat'
   },
   chat: {
     userList: '.user-list-content li',
@@ -19,7 +19,7 @@ const SELECTORS = {
   }
 };
 
-const CITY_MAP = {
+var CITY_MAP = {
   '全国':'100010000','北京':'101010100','上海':'101020100','广州':'101280100','深圳':'101280600',
   '杭州':'101210100','成都':'101270100','武汉':'101200100','西安':'101110100','南京':'101190100',
   '苏州':'101190400','天津':'101030100','重庆':'101040100','长沙':'101250100','郑州':'101180100',

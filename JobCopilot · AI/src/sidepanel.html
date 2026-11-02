@@ -22,15 +22,51 @@
       <label>简历文字（必填，用于AI筛选 + 生成招呼语）</label>
       <textarea id="resumeText" rows="5" placeholder="粘贴你的简历：技能、项目经历、教育背景、实习经历等，越详细招呼语越精准"></textarea>
 
-      <label>岗位关键词</label>
-      <input type="text" id="keyword" placeholder="如：数据分析 / AI应用">
+      <label for="collectSource">收集来源</label>
+      <select id="collectSource">
+        <option value="search">按关键词搜索</option>
+        <option value="current">当前 BOSS 职位列表／校园页</option>
+      </select>
+      <p class="hint">当前页模式沿用页面上的筛选条件，从当前滚动位置继续收集。</p>
 
-      <label>城市</label>
-      <input type="text" id="city" placeholder="如：沈阳 / 北京">
+      <label for="keyword">岗位关键词（多个用逗号分隔）</label>
+      <input type="text" id="keyword" placeholder="如：前端开发，Web开发，软件开发">
+
+      <label for="experience">搜索人群</label>
+      <select id="experience">
+        <option value="">不限</option>
+        <option value="102">应届生／校招</option>
+        <option value="108">在校生</option>
+        <option value="101">经验不限</option>
+      </select>
+
+      <label>城市（多个用逗号分隔）</label>
+      <input type="text" id="city" placeholder="如：北京，上海，深圳；或全国">
+
+      <label class="mini"><input type="checkbox" id="expandSearch" checked> 结果不足时自动扩展搜索</label>
+      <p class="hint">先搜原词，再搜相关关键词；全国范围会按城市分别搜索，指定城市则不扩城。保留人群与薪资条件。每轮最多搜索 12 个入口，再次收集接续进度；当前页模式不扩展。</p>
+      <button class="mini-btn" id="resetSearch">下次从首个搜索入口开始</button>
+
+      <label for="salaryPeriod">薪资筛选</label>
+      <select id="salaryPeriod">
+        <option value="">不限薪资</option>
+        <option value="month">月薪（K，千元）</option>
+        <option value="day">日薪（元）</option>
+        <option value="year">年薪（万元）</option>
+      </select>
+      <div class="row" id="salaryBounds" hidden>
+        <div class="col"><label for="salaryMin">最低期望</label><input type="number" id="salaryMin" min="0" step="any" placeholder="不限"></div>
+        <div class="col"><label for="salaryMax">最高期望</label><input type="number" id="salaryMax" min="0" step="any" placeholder="不限"></div>
+      </div>
+      <label class="mini" id="salaryUnknownLabel" hidden><input type="checkbox" id="salaryUnknown" checked> 保留面议／未标明薪资的岗位</label>
+      <p class="hint" id="salaryHint" hidden>按区间有交集保留；只比较所选计薪方式，其他方式排除。月薪不折算额外薪数。当前审核列表即时重筛，投递时保存条件并再次核对。数字解析异常的岗位不会按面议放行。</p>
 
       <label>收集岗位数量</label>
       <input type="number" id="count" value="20" min="1" max="200">
 
+      <label class="mini"><input type="checkbox" id="excludeSeen" checked> 只收集未见岗位（已投岗位始终跳过）</label>
+      <button class="mini-btn" id="clearCollected">清空收集历史</button>
+      <p class="hint">数量指本轮新收集岗位数；AI 匹配数量可能更少。清空收集历史会重置搜索进度，不会清空已投记录。</p>
       <button class="btn-primary" id="saveCfg">保存配置</button>
       <span id="saved" class="ok-msg" style="display:none">✓ 已保存</span>
     </div>
@@ -61,6 +97,8 @@
         <label class="mini"><input type="checkbox" id="selAll" checked> 全选匹配</label>
         <button class="btn-go" id="btnDeliver">投递选中</button>
       </div>
+      <p class="hint">AI 未推荐的岗位也可手动勾选，请核对毕业届别和岗位要求。</p>
+      <p class="hint" id="salaryReviewSummary"></p>
       <div id="reviewList"></div>
     </div>
   </section>
@@ -71,6 +109,7 @@
     <div class="log" id="log"></div>
   </section>
 
+  <script src="salary.js"></script>
   <script src="sidepanel.js"></script>
 </body>
 </html>

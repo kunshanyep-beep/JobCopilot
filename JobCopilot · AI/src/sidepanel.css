@@ -36,7 +36,7 @@ input[type=file] { width: 100%; font-size: 12px; }
 .mini { font-weight: 600; font-size: 12px; }
 #reviewList { margin-top: 10px; max-height: 260px; overflow-y: auto; }
 .job-item { display: flex; gap: 8px; padding: 7px; border-bottom: 1px solid #f0f0f0; align-items: flex-start; }
-.job-item.skip { opacity: .55; }
+.job-item.skip { background: #fffaf5; }
 .job-item input { margin-top: 3px; }
 .job-main { flex: 1; }
 .job-title { font-weight: 600; }
@@ -49,3 +49,9 @@ input[type=file] { width: 100%; font-size: 12px; }
 .log-item { margin-bottom: 3px; line-height: 1.4; }
 .log-item.info { color: #a0c4ff; } .log-item.success { color: #b7e4c7; } .log-item.error { color: #ff6b6b; } .log-item.warn { color: #ffd166; }
 .log-time { color: #555; margin-right: 5px; }
+
+.hint { margin: 6px 0; color: #666; font-size: 11.5px; line-height: 1.5; }
+button:disabled { opacity: .45; cursor: not-allowed; }
+
+[hidden] { display: none !important; }
+#salaryBounds .col { min-width: 0; }
